@@ -1,23 +1,54 @@
 import classes from './post-content.module.css';
 import ReactMarkdown from 'react-markdown';
 import PostHeader from './post-header';
+import Image from 'next/image';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { atomDark } from 'react-syntax-highlighter/dist/cjs/styles/prism';
 
-const DUMMY_POST = {
-    slug: 'getting-started-nextjs4',
-    title: 'Getting started with NextJS',
-    image: 'getting-started-nextjs.png',
-    excerpt:
-        'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum, officia porro ut, quae aliquam, reprehenderit perspiciatis commodi suscipit optio accusamus quis. Quasi doloremque adipisci ad nisi, optio voluptas eaque veniam.',
-    date: '2021-03-10',
-    content: '# this is first post',
-};
-const imagePath = `/images/posts/${DUMMY_POST.slug}/${DUMMY_POST.image}`;
+const PostContent = (props) => {
+    const { post } = props;
 
-const PostContent = () => {
+    const customRenderers = {
+        paragraph(paragraph) {
+            const { node } = paragraph;
+            if (node.children[0].type === 'image') {
+                const image = node.children[0];
+
+                return (
+                    <div className={classes.image}>
+                        <Image
+                            src={`/images/posts/${post.slug}/${image.url}`}
+                            alt={image.alt}
+                            width={600}
+                            height={300}
+                        />
+                    </div>
+                );
+            }
+            return <p>{paragraph.children}</p>;
+        },
+
+        code(code) {
+            const { language, value } = code;
+            return (
+                <SyntaxHighlighter
+                    style={atomDark}
+                    language={language}
+                    children={value}
+                />
+            );
+        },
+    };
+
     return (
         <article className={classes.content}>
-            <PostHeader title={DUMMY_POST.slug} image={imagePath} />
-            <ReactMarkdown>{DUMMY_POST.content}</ReactMarkdown>
+            <PostHeader
+                title={post.slug}
+                image={`/images/posts/${post.slug}/${post.image}`}
+            />
+            <ReactMarkdown renderers={customRenderers}>
+                {post.content}
+            </ReactMarkdown>
         </article>
     );
 };
