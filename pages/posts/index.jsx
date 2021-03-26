@@ -1,44 +1,17 @@
 import AllPosts from '../../components/posts/all-posts';
 import { getAllPosts } from '../../lib/posts-util';
-
-const DUMMY_POSTS = [
-    {
-        slug: 'getting-started-nextjs',
-        title: 'Getting started with NextJS',
-        image: 'getting-started-nextjs.png',
-        excerpt:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum, officia porro ut, quae aliquam, reprehenderit perspiciatis commodi suscipit optio accusamus quis. Quasi doloremque adipisci ad nisi, optio voluptas eaque veniam.',
-        date: '2021-03-10',
-    },
-    {
-        slug: 'getting-started-nextjs2',
-        title: 'Getting started with NextJS',
-        image: 'getting-started-nextjs.png',
-        excerpt:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum, officia porro ut, quae aliquam, reprehenderit perspiciatis commodi suscipit optio accusamus quis. Quasi doloremque adipisci ad nisi, optio voluptas eaque veniam.',
-        date: '2021-03-10',
-    },
-    {
-        slug: 'getting-started-nextjs3',
-        title: 'Getting started with NextJS',
-        image: 'getting-started-nextjs.png',
-        excerpt:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum, officia porro ut, quae aliquam, reprehenderit perspiciatis commodi suscipit optio accusamus quis. Quasi doloremque adipisci ad nisi, optio voluptas eaque veniam.',
-        date: '2021-03-10',
-    },
-    {
-        slug: 'getting-started-nextjs4',
-        title: 'Getting started with NextJS',
-        image: 'getting-started-nextjs.png',
-        excerpt:
-            'Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolorum, officia porro ut, quae aliquam, reprehenderit perspiciatis commodi suscipit optio accusamus quis. Quasi doloremque adipisci ad nisi, optio voluptas eaque veniam.',
-        date: '2021-03-10',
-    },
-];
+import Head from 'next/head';
 
 const AllPostPage = (props) => {
     return (
         <>
+            <Head>
+                <title>All Posts</title>
+                <meta
+                    name="description"
+                    content="A list of all programming-related tutorials and posts!"
+                />
+            </Head>
             <AllPosts posts={props.posts} />
         </>
     );
