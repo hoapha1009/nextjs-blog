@@ -23,8 +23,7 @@ async function handler(req, res) {
         };
 
         let client;
-        const uri =
-            'mongodb+srv://hoapha1009:bb8WsPeh4AMCiH3o@cluster0.lgqzx.mongodb.net/my-site?retryWrites=true&w=majority';
+        const uri = `mongodb+srv://${process.env.mongodb_username}:${process.env.mongodb_password}@${process.env.mongodb_clustername}.lgqzx.mongodb.net/${process.env.mongodb_database}retryWrites=true&w=majority`;
 
         try {
             client = await MongoClient.connect(uri, {
